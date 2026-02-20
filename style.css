@@ -1,0 +1,481 @@
+/* ─── Variables */
+:root {
+    --creme:    #f5f0e8;
+    --creme2:   #ede6d6;
+    --brun:     #2c1f14;
+    --or:       #b8952a;
+    --or-clair: #d4b050;
+    --rouge:    #8b1a1a;
+    --vert:     #1a5c2a;
+    --gris:     #7a7060;
+    --bordure:  #c8b87a;
+
+    --shadow: 0 2px 12px rgba(44,31,20,0.12);
+    --shadow-lg: 0 6px 32px rgba(44,31,20,0.18);
+}
+
+/* ─── Reset / Base  */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background-color: var(--creme2);
+    background-image:
+        radial-gradient(ellipse at 30% 0%,   #e8dfc8 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 100%, #ddd4b8 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23b8952a' fill-opacity='0.04'%3E%3Cpath d='M20 0 L40 20 L20 40 L0 20z'/%3E%3C/g%3E%3C/svg%3E");
+    color: var(--brun);
+    min-height: 100vh;
+}
+
+/* ─── Typographie  */
+h1, h2 { font-family: 'Playfair Display', serif; }
+
+/*PAGE ACCUEIL*/
+.page-accueil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+}
+
+.accueil-wrap {
+    background: var(--creme);
+    border: 2px solid var(--bordure);
+    box-shadow: var(--shadow-lg), inset 0 0 0 6px var(--creme), inset 0 0 0 7px var(--bordure);
+    max-width: 460px;
+    width: 100%;
+    padding: 48px 44px;
+    text-align: center;
+    position: relative;
+}
+
+/* Coins décoratifs */
+.accueil-wrap::before, .accueil-wrap::after {
+    content: '';
+    position: absolute;
+    width: 28px; height: 28px;
+    border-color: var(--or);
+    border-style: solid;
+}
+.accueil-wrap::before { top: 12px; left: 12px;   border-width: 2px 0 0 2px; }
+.accueil-wrap::after  { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+
+.accueil-deco {
+    font-size: 36px;
+    color: var(--or);
+    line-height: 1;
+    margin-bottom: 8px;
+    opacity: .7;
+}
+
+.accueil-titre {
+    font-size: clamp(36px, 8vw, 56px);
+    color: var(--brun);
+    letter-spacing: 10px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.accueil-sous {
+    font-style: italic;
+    color: var(--gris);
+    letter-spacing: 3px;
+    font-size: 13px;
+    margin-top: 4px;
+    margin-bottom: 32px;
+}
+
+.accueil-regles {
+    background: var(--creme2);
+    border: 1px solid var(--bordure);
+    padding: 20px 24px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.accueil-regles h2 {
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 12px;
+}
+
+.accueil-regles ul {
+    list-style: none;
+    font-size: 13px;
+    line-height: 2;
+    color: var(--brun);
+}
+
+.accueil-regles ul li::before {
+    content: '◆ ';
+    color: var(--or);
+    font-size: 10px;
+}
+
+.accueil-score-max {
+    font-size: 12px;
+    color: var(--gris);
+    margin-bottom: 8px;
+}
+
+.accueil-score-max span {
+    color: var(--or);
+    font-weight: bold;
+}
+
+.high-score {
+    font-size: 13px;
+    color: var(--brun);
+    margin-bottom: 28px;
+    padding: 10px 16px;
+    border: 1px dashed var(--bordure);
+}
+
+/* ─── Boutons  */
+.btn-jouer {
+    display: inline-block;
+    background: var(--brun);
+    color: var(--creme);
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    letter-spacing: 4px;
+    padding: 14px 36px;
+    border: 2px solid var(--brun);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background .2s, color .2s;
+}
+
+.btn-jouer:hover {
+    background: var(--or);
+    border-color: var(--or);
+    color: var(--brun);
+}
+
+.btn-secondaire {
+    background: transparent;
+    color: var(--gris);
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 10px 20px;
+    border: 1px solid var(--bordure);
+    cursor: pointer;
+    transition: color .2s, border-color .2s;
+}
+
+.btn-secondaire:hover {
+    color: var(--brun);
+    border-color: var(--brun);
+}
+
+/* ─── PAGE JEU */
+.page-jeu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 32px;
+}
+
+/* ─── HUD */
+.hud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--bordure);
+    background: var(--creme);
+    margin-bottom: 0;
+}
+
+.hud-titre {
+    font-size: 22px;
+    letter-spacing: 8px;
+    color: var(--brun);
+    font-weight: 900;
+}
+
+.hud-bloc { text-align: center; }
+.hud-bloc--droite { text-align: right; }
+
+.hud-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gris);
+    margin-bottom: 2px;
+}
+
+.hud-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--brun);
+}
+
+.hud-val small { font-size: 14px; color: var(--gris); }
+
+.hud-val--danger { color: var(--rouge); }
+
+/* ─── Barre de progression */
+.progress-wrap {
+    width: 100%;
+    max-width: 600px;
+    height: 4px;
+    background: var(--creme2);
+    border-bottom: 1px solid var(--bordure);
+    margin-bottom: 16px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--or), var(--or-clair));
+    transition: width .4s ease;
+    min-width: 2px;
+}
+
+/* ─── Message feedback */
+.message {
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 9px 20px;
+    margin-bottom: 14px;
+    border-left: 3px solid var(--bordure);
+    background: var(--creme);
+    max-width: 560px;
+    width: calc(100% - 32px);
+    color: var(--gris);
+}
+
+.message--ok {
+    border-color: var(--vert);
+    color: var(--vert);
+    background: #f0f7f2;
+}
+
+.message--ko {
+    border-color: var(--rouge);
+    color: var(--rouge);
+    background: #fdf2f2;
+}
+
+/* ─── Plateau de jeu */
+.plateau {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: min(560px, calc(100vw - 32px));
+    margin-bottom: 20px;
+}
+
+/* ─── Cartes */
+.carte, .carte-form { display: block; }
+
+.carte {
+    aspect-ratio: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--bordure);
+    font-size: clamp(22px, 6vw, 36px);
+    position: relative;
+    background: var(--creme);
+    transition: box-shadow .15s, transform .15s;
+}
+
+/* Carte face cachée (bouton) */
+.carte--cachee {
+    background: var(--brun);
+    border-color: var(--brun);
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+    color: transparent;
+    transition: background .15s, border-color .15s;
+}
+
+.carte--cachee:hover {
+    background: var(--or);
+    border-color: var(--or);
+}
+
+.carte-dos {
+    color: var(--or);
+    font-size: 24px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    opacity: .6;
+    pointer-events: none;
+}
+
+.carte-form {
+    aspect-ratio: 1;
+}
+
+.carte-form .carte {
+    width: 100%;
+    height: 100%;
+}
+
+/* Carte retournée en attente */
+.carte--retournee {
+    background: var(--creme);
+    border-color: var(--or-clair);
+    box-shadow: 0 0 0 2px var(--or-clair), var(--shadow);
+}
+
+.carte--attente {
+    cursor: default;
+}
+
+/* Carte trouvée */
+.carte--trouvee {
+    background: #eef6f0;
+    border-color: var(--vert);
+    opacity: .75;
+    cursor: default;
+}
+
+.carte-emoji {
+    line-height: 1;
+    user-select: none;
+}
+
+/* ─── Footer actions */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.actions-info {
+    font-size: 12px;
+    color: var(--gris);
+    letter-spacing: 2px;
+}
+
+/* PAGE VICTOIRE */
+.page-victoire {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+}
+
+.victoire-wrap {
+    background: var(--creme);
+    border: 2px solid var(--bordure);
+    box-shadow: var(--shadow-lg), inset 0 0 0 6px var(--creme), inset 0 0 0 7px var(--bordure);
+    max-width: 440px;
+    width: 100%;
+    padding: 48px 44px;
+    text-align: center;
+    position: relative;
+}
+
+/* Coins décoratifs identiques à l'accueil */
+.victoire-wrap::before, .victoire-wrap::after {
+    content: '';
+    position: absolute;
+    width: 28px; height: 28px;
+    border-color: var(--or);
+    border-style: solid;
+}
+.victoire-wrap::before { top: 12px; left: 12px;   border-width: 2px 0 0 2px; }
+.victoire-wrap::after  { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; }
+
+.victoire-rang {
+    width: 72px;
+    height: 72px;
+    border: 3px solid;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    margin: 0 auto 20px;
+}
+
+.victoire-titre {
+    font-size: clamp(32px, 7vw, 48px);
+    color: var(--brun);
+    font-weight: 900;
+    letter-spacing: 4px;
+    line-height: 1;
+}
+
+.victoire-sous {
+    font-style: italic;
+    color: var(--gris);
+    font-size: 15px;
+    margin-top: 4px;
+    margin-bottom: 24px;
+}
+
+.nouveau-record {
+    background: var(--brun);
+    color: var(--or-clair);
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding: 8px 20px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* Tableau score */
+.score-table {
+    border: 1px solid var(--bordure);
+    margin-bottom: 20px;
+}
+
+.score-ligne {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--creme2);
+    color: var(--gris);
+}
+
+.score-ligne:last-child { border-bottom: none; }
+
+.score-ligne--bonus { color: var(--vert); }
+
+.score-ligne--total {
+    background: var(--creme2);
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--brun);
+    border-top: 2px solid var(--bordure) !important;
+}
+
+.best-score {
+    font-size: 13px;
+    color: var(--gris);
+    margin-bottom: 28px;
+    padding: 10px 16px;
+    border: 1px dashed var(--bordure);
+}
+
+.best-score strong { color: var(--or); }
+
+.victoire-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
